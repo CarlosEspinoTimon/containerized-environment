@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+flask = "*"
+flask-cors = "*"
+flask-marshmallow = "*"
+flask-migrate = "*"
+flask-sqlalchemy = "*"
+marshmallow-sqlalchemy = "*"
+mysqlclient = "*"
+ptvsd = "*"
+pyjwt = "*"
+pymysql = "*"
+python-dotenv = "*"
+requests = "*"
+sqlalchemy = "*"
+
+[requires]
+python_version = "3.7"

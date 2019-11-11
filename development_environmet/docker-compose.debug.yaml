@@ -1,0 +1,21 @@
+version: '3'
+services:
+  debug-backend:
+    build:
+      context: ../backend/
+      args:
+        username: "nonroot"
+    ports:
+     - "5001:5000"
+     - "5678:5678"
+    volumes:
+      - ../backend:/server
+    networks:
+      - dishes
+    command: pipenv run python -m ptvsd --host 0.0.0.0 --port 5678 --wait -m flask run --host 0.0.0.0 --no-reload --with-threads
+
+    
+networks:
+  dishes:
+    external:
+      name: dishes
