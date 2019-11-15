@@ -15,6 +15,17 @@ services:
     networks:
       - dishes
     command: pipenv run flask run --host=0.0.0.0
+  frontend:
+    build:
+      context: ../frontend
+    ports:
+      - "4200:4200"
+      - '9876:9876'
+    volumes:
+      - ../frontend:/frontend
+    networks:
+      - dishes
+    command: ng serve --host 0.0.0.0 --port 4200 --poll=2000
   db:
     image: mysql:5.7
     environment:

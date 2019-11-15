@@ -1,5 +1,5 @@
 backend=$(shell docker-compose ps -q backend)
-
+frontend=$(shell docker-compose ps -q frontend)
 
 # Init
 init:
@@ -10,21 +10,29 @@ build:
 	docker-compose build
 
 # Init the debuger
-debug-backend:
+backend-debug:
 	export FLASK_DEBUG=1 && docker-compose -f docker-compose.debug.yaml up
 
 # Access backend
-access-backend:
+backend-access:
 	docker exec -it $(backend) sh
+
+# Access frontend
+frontend-access:
+	docker exec -it $(frontend) sh
 
 # Install a module
 # usage --> make backend-install-module module="MODULE NAME"
 backend-install-module:
 	docker exec -t $(backend) pipenv install '$(module)'
 
-# Run the tests
+# Run the tests in the backend
 backend-tests:
 	docker exec -t $(backend) pipenv run python tests/tests.py
+
+# Run the tests in the frontend
+frontend-tests:
+	docker exec -it $(frontend) ng test
 
 # Run only one test
 # usage --> make backend-one-test test="TEST NAME"
